@@ -1,8 +1,5 @@
 FROM ubuntu:xenial-20180705 AS add-apt-repositories
 
-
-ADD assets/sources.list /etc/apt/
-
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y wget \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv E1DD270288B4E6030699E45FA1715D88E1DF1F24 \
