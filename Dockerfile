@@ -43,15 +43,16 @@ RUN apt-get update \
  && update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
  && gem install --no-document bundler -v '< 2.0, >= 1.3.0' \
  && rm -rf /var/lib/apt/lists/*
- 
-RUN mkdir -p ${REDMINE_DATA_DIR}/themes && cd ${REDMINE_DATA_DIR}/themes \
-&& git clone https://github.com/mrliptontea/PurpleMine2.git && git -C PurpleMine2 checkout tags/v2.1.1
 
 COPY assets/plugins/ ${REDMINE_DATA_DIR}/plugins/
 
 COPY assets/build/ ${REDMINE_BUILD_ASSETS_DIR}/
 
 RUN bash ${REDMINE_BUILD_ASSETS_DIR}/install.sh
+
+RUN mkdir -p ${REDMINE_DATA_DIR}/themes && cd ${REDMINE_DATA_DIR}/themes \
+&& git clone https://github.com/mrliptontea/PurpleMine2.git && git -C PurpleMine2 checkout tags/v2.1.1 \
+&& chown -R ${REDMINE_USER}:${REDMINE_USER} ${REDMINE_DATA_DIR}
 
 COPY assets/runtime/ ${REDMINE_RUNTIME_ASSETS_DIR}/
 
