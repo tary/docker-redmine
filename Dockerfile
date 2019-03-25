@@ -16,7 +16,7 @@ RUN apt-get update \
 
 FROM ubuntu:xenial-20180705
 
-LABEL maintainer="sameer@damagehead.com"
+LABEL maintainer="tary.hitwh@gmail.com"
 
 ENV RUBY_VERSION=2.3 \
     REDMINE_VERSION=3.4.7 \
