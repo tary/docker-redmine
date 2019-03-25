@@ -1,5 +1,8 @@
 FROM ubuntu:xenial-20180705 AS add-apt-repositories
 
+
+ADD assets/sources.list /etc/apt/
+
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y wget \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv E1DD270288B4E6030699E45FA1715D88E1DF1F24 \
@@ -43,6 +46,11 @@ RUN apt-get update \
  && update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
  && gem install --no-document bundler -v '< 2.0, >= 1.3.0' \
  && rm -rf /var/lib/apt/lists/*
+ 
+RUN mkdir -p ${REDMINE_DATA_DIR}/themes && cd ${REDMINE_DATA_DIR}/themes \
+&& git clone https://github.com/mrliptontea/PurpleMine2.git && git -C PurpleMine2 checkout tags/v2.1.1
+
+COPY assets/plugins/ ${REDMINE_DATA_DIR}/plugins/
 
 COPY assets/build/ ${REDMINE_BUILD_ASSETS_DIR}/
 
