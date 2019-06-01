@@ -2,8 +2,8 @@
 docker run --restart=always --name=redmine -it -d \
   --env='DB_ADAPTER=mysql2' \
   -p 80:80 -p 443:443 \
-  --env='DB_HOST=192.168.102.85' --env='DB_NAME=redmine_production' \
-  --env='DB_USER=redmine' --env='DB_PASS=NhLXNoYTItbml' \
+  --env='DB_HOST=YOUR_ADDR' --env='DB_NAME=redmine_production' \
+  --env='DB_USER=redmine' --env='DB_PASS=REPLACE_WITH_YOUR_PWD' \
   -v E:/DockerWorkspace/redmine2:/home/redmine/data \
   taryhit/redmine
 ```
