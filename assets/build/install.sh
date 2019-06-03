@@ -98,7 +98,8 @@ sed -i "s|user www-data|user ${REDMINE_USER}|" /etc/nginx/nginx.conf
 
 # move supervisord.log file to ${REDMINE_LOG_DIR}/supervisor/
 sed -i "s|^logfile=.*|logfile=${REDMINE_LOG_DIR}/supervisor/supervisord.log ;|" /etc/supervisor/supervisord.conf
-
+sed -i "s|^\[unix_http_server\]|[unix_http_server]\nusername = dummy\npassword = dummy\n|" /etc/supervisor/supervisord.conf
+sed -i "s|^\[supervisorctl\]|[supervisorctl]\nusername = dummy\npassword = dummy\n|" /etc/supervisor/supervisord.conf
 # move nginx logs to ${REDMINE_LOG_DIR}/nginx
 sed -i \
   -e "s|access_log /var/log/nginx/access.log;|access_log ${REDMINE_LOG_DIR}/nginx/access.log;|" \
